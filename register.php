@@ -15,8 +15,11 @@ if(isset($_POST['submit'])){
 
    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
+   
    if(mysqli_num_rows($select) > 0){
-      $message[] = 'user already exist'; 
+      $message[] = 'user already exist';
+
+
    }else{
       if($pass != $cpass){
          $message[] = 'confirm password not matched!';
@@ -31,7 +34,13 @@ if(isset($_POST['submit'])){
             header('location:login.php');
          }else{
             $message[] = 'registeration failed!';
+
+  
+
+
+
          }
+
       }
    }
 
@@ -49,9 +58,10 @@ if(isset($_POST['submit'])){
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
-
+   
 </head>
 <body>
+
    
 <div class="form-container">
 
@@ -66,14 +76,17 @@ if(isset($_POST['submit'])){
       ?>
       <input type="text" name="name" placeholder="enter username" class="box" required>
       <input type="email" name="email" placeholder="enter email" class="box" required>
-      <input type="password" name="password" placeholder="enter password" class="box" required>
-      <input type="password" name="cpassword" placeholder="confirm password" class="box" required>
-    
-      <input type="submit" name="submit" value="register now" class="btn">
-      <p>already have an account? <a href="login.php">login now</a></p>
-   </form>
+      <input type="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="password" placeholder="enter password" class="box" id="myInput" required>
+      
 
-</div>
+      <input type="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="cpassword" placeholder="confirm password" class="box" id="myinput"  required>
+
+      <input type="submit" value="submit" name="submit"/>
+      
+
+      <p>already have an account? <a href="login.php">login now</a></p>
+
+
 
 </body>
 </html>
